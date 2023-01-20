@@ -1,9 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿namespace LivroReceitas.Comunicacao.Requesicoes;
 
-namespace LivroReceitas.Domain.Entidades;
-
-
-public class Usuario : EntidadeBase
+public class RequisicaoRegistrarUsuario
 {
 	public string Nome { get; set; }
 	public string Email { get; set; }
