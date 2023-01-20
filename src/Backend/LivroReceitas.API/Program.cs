@@ -7,7 +7,7 @@ using LivroReceitas.Infra.Migrations;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+builder.Services.AddRouting(option => option.LowercaseUrls = true);
 
 builder.Services.AddControllers();
 
