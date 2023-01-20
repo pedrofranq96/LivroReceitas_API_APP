@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="FluentValidation" Version="11.4.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Shared\LivroReceitas.Comunicacao\LivroReceitas.Comunicacao.csproj" />
     <ProjectReference Include="..\..\Shared\LivroReceitas.Exceptions\LivroReceitas.Exceptions.csproj" />
     <ProjectReference Include="..\LivroReceitas.Domain\LivroReceitas.Domain.csproj" />
