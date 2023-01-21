@@ -1,6 +1,6 @@
 ﻿namespace LivroReceitas.Comunicacao.Requesicoes;
 
-public class RequisicaoRegistrarUsuario
+public class RequisicaoRegistrarUsuarioJson
 {
 	public string Nome { get; set; }
 	public string Email { get; set; }
