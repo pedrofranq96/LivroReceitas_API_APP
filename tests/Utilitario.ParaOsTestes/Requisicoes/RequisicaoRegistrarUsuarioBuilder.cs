@@ -1,7 +1,7 @@
 ﻿using Bogus;
 using LivroReceitas.Comunicacao.Requesicoes;
 
-namespace Utilitario.ParaOsTestes.Requisicoes;
+namespace UtilitarioParaOsTestes.Requisicoes;
 
 public class RequisicaoRegistrarUsuarioBuilder
 {

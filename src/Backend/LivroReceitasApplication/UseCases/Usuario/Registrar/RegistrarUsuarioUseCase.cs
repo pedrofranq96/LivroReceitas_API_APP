@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using LivroReceitas.Application.Servicos.Criptografia;
 using LivroReceitas.Application.Servicos.Token;
 using LivroReceitas.Comunicacao.Requesicoes;
