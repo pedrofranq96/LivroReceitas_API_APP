@@ -7,7 +7,7 @@ public class AutoMapperConfig :Profile
 {
 	public AutoMapperConfig()
 	{
-		CreateMap<RequisicaoRegistrarUsuario, Domain.Entidades.Usuario>()
+		CreateMap<RequisicaoRegistrarUsuarioJson, Domain.Entidades.Usuario>()
 			.ForMember(destino => destino.Senha, config => config.Ignore());
 	}
 }
