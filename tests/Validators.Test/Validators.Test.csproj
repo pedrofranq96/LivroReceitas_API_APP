@@ -24,7 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Backend\LivroReceitasApplication\LivroReceitas.Application.csproj" />
-    <ProjectReference Include="..\Utilitario.ParaOsTestes\Utilitario.ParaOsTestes.csproj" />
+    <ProjectReference Include="..\Utilitario.ParaOsTestes\UtilitarioParaOsTestes.csproj" />
   </ItemGroup>
 
 </Project>

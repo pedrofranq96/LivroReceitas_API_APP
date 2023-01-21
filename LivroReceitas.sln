@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UseCase.Test", "tests\UseCa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi.Test", "tests\WebApi.Test\WebApi.Test.csproj", "{9C88E617-E304-4A5D-B29E-FA8D2A2DE506}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilitario.ParaOsTestes", "tests\Utilitario.ParaOsTestes\Utilitario.ParaOsTestes.csproj", "{C84DEAD9-2AA2-4D58-9C0F-1DAF92C51874}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UtilitarioParaOsTestes", "tests\Utilitario.ParaOsTestes\UtilitarioParaOsTestes.csproj", "{C84DEAD9-2AA2-4D58-9C0F-1DAF92C51874}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

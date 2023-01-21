@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using LivroReceitas.Application.UseCases.Usuario.Registrar;
 using LivroReceitas.Exceptions;
-using Utilitario.ParaOsTestes.Requisicoes;
+using UtilitarioParaOsTestes.Requisicoes;
 using Xunit;
 
 namespace Validators.Test.Usuario.Registrar;
