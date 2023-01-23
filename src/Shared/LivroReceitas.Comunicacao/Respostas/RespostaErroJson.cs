@@ -1,19 +1,19 @@
 ﻿namespace LivroReceitas.Comunicacao.Respostas;
 
-public class RespostaErro
+public class RespostaErroJson
 {
 	public List<string> Mensagens { get; set; }
 
 
 
-	public RespostaErro(string mensagens)
+	public RespostaErroJson(string mensagens)
 	{
 		Mensagens = new List<string>
 		{
 			mensagens
 		};
 	}
-	public RespostaErro(List<string> mensagens)
+	public RespostaErroJson(List<string> mensagens)
 	{
 		Mensagens = mensagens;
 	}
