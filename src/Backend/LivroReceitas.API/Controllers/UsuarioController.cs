@@ -5,9 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LivroReceitas.API.Controllers
 {
-	[ApiController]
-	[Route("[controller]")]
-	public class UsuarioController : ControllerBase
+	public class UsuarioController : LivroReceitasController
 	{
 	
 		[HttpPost]

@@ -35,7 +35,7 @@ public class FiltroDasExceptions : IExceptionFilter
 		}
 		else if(context.Exception is LoginInvalidoException)
 		{
-			TratarErroDeValidacoesException(context);
+			TratarLoginException(context);
 		}
 	}
 
