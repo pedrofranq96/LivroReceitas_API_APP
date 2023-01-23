@@ -2,7 +2,7 @@
 using LivroReceitas.Application.Servicos.Token;
 using LivroReceitas.Comunicacao.Requesicoes;
 using LivroReceitas.Comunicacao.Respostas;
-using LivroReceitas.Domain.Repositorio;
+using LivroReceitas.Domain.Repositorio.Usuario;
 using LivroReceitas.Exceptions.ExceptionsBase;
 
 namespace LivroReceitas.Application.UseCases.Login.FazerLogin;

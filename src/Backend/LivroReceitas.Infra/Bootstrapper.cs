@@ -5,10 +5,9 @@ using LivroReceitas.Infra.AcessoRepositorio;
 using LivroReceitas.Infra.AcessoRepositorio.Repositorio;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Net.NetworkInformation;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
-using FluentMigrator.Runner.Initialization;
+using LivroReceitas.Domain.Repositorio.Usuario;
 
 namespace LivroReceitas.Infra;
 
@@ -45,7 +44,8 @@ public static class Bootstrapper
 	private static void AddRepositorios(IServiceCollection services)
 	{
 		services.AddScoped<IUsuarioWriteOnlyRepositorio, UsuarioRepositorio>()
-			.AddScoped<IUsuarioReadOnlyRepositorio, UsuarioRepositorio>();
+			.AddScoped<IUsuarioReadOnlyRepositorio, UsuarioRepositorio>()
+			.AddScoped<IUpdateOnlyRepositorio, UsuarioRepositorio>();
 	}
 	private static void AddFluentMigrator(IServiceCollection services, IConfiguration configurationManager)
 	{
