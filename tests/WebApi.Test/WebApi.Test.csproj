@@ -30,6 +30,7 @@
     <ProjectReference Include="..\..\src\Backend\LivroReceitas.API\LivroReceitas.API.csproj" />
     <ProjectReference Include="..\..\src\Backend\LivroReceitas.Infra\LivroReceitas.Infra.csproj" />
     <ProjectReference Include="..\..\src\Shared\LivroReceitas.Exceptions\LivroReceitas.Exceptions.csproj" />
+    <ProjectReference Include="..\UseCase.Test\UseCase.Test.csproj" />
     <ProjectReference Include="..\Utilitario.ParaOsTestes\UtilitarioParaOsTestes.csproj" />
   </ItemGroup>
 
