@@ -1,9 +1,9 @@
 ﻿using LivroReceitas.Application.Servicos.Criptografia;
 using LivroReceitas.Application.Servicos.Token;
+using LivroReceitas.Application.UseCases.Login.FazerLogin;
 using LivroReceitas.Application.UseCases.Usuario.Registrar;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using static System.Collections.Specialized.BitVector32;
 
 namespace LivroReceitas.Application;
 
@@ -13,7 +13,8 @@ public static class Bootstrapper
 	{
 		AddChaveSenha(services, configuration);
 		AddTokenJWT(services, configuration);
-		services.AddScoped<IRegistrarUsuarioUseCase, RegistrarUsuarioUseCase>();
+		AddUseCases(services);
+		
 	}
 
 	private static void AddChaveSenha(this IServiceCollection services, IConfiguration configuration)
@@ -26,5 +27,11 @@ public static class Bootstrapper
 		var sectionTempoDeVida = configuration.GetRequiredSection("Configuracoes:TempoDeVidaToken");
 		var sectionKey= configuration.GetRequiredSection("Configuracoes:ChaveToken");
 		services.AddScoped(options => new TokenController(int.Parse(sectionTempoDeVida.Value), sectionKey.Value));
+	}
+
+	private static void AddUseCases(this IServiceCollection services)
+	{
+		services.AddScoped<IRegistrarUsuarioUseCase, RegistrarUsuarioUseCase>()
+			.AddScoped<ILoginUseCase, LoginUseCase>();
 	}
 }
