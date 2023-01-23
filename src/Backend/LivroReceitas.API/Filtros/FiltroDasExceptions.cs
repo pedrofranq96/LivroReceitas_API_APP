@@ -32,7 +32,11 @@ public class FiltroDasExceptions : IExceptionFilter
 		if(context.Exception is ErrosDeValidacaoException)
 		{
 			TratarErroDeValidacoesException(context);
-		}		
+		}
+		else if(context.Exception is LoginInvalidoException)
+		{
+
+		}
 	}
 
 	private void TratarErroDeValidacoesException(ExceptionContext context)
@@ -41,5 +45,12 @@ public class FiltroDasExceptions : IExceptionFilter
 
 		context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
 		context.Result = new ObjectResult(new RespostaErro(erroValidacaoException.MensagensDeErro));
+	}
+
+	private void TratarLoginException(ExceptionContext context)
+	{
+		var erroLogin = context.Exception as LoginInvalidoException;
+		context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+		context.Result = new ObjectResult(new RespostaErro(erroLogin.Message));
 	}
 }
