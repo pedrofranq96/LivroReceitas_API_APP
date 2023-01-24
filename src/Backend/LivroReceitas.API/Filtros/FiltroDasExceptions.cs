@@ -21,13 +21,13 @@ public class FiltroDasExceptions : IExceptionFilter
 		}
 	}
 
-	private void LancarErroDesconhecido(ExceptionContext context)
+	private static void LancarErroDesconhecido(ExceptionContext context)
 	{
 		context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 		context.Result = new ObjectResult(new RespostaErroJson(ResourceMensagensDeErro.ERRO_DESCONHECIDO));
 	}
 
-	private void TratarLivroReceitasException(ExceptionContext context)
+	private static void TratarLivroReceitasException(ExceptionContext context)
 	{
 		if(context.Exception is ErrosDeValidacaoException)
 		{
@@ -39,7 +39,7 @@ public class FiltroDasExceptions : IExceptionFilter
 		}
 	}
 
-	private void TratarErroDeValidacoesException(ExceptionContext context)
+	private static void TratarErroDeValidacoesException(ExceptionContext context)
 	{
 		var erroValidacaoException = context.Exception as ErrosDeValidacaoException;
 
@@ -47,7 +47,7 @@ public class FiltroDasExceptions : IExceptionFilter
 		context.Result = new ObjectResult(new RespostaErroJson(erroValidacaoException.MensagensDeErro));
 	}
 
-	private void TratarLoginException(ExceptionContext context)
+	private static void TratarLoginException(ExceptionContext context)
 	{
 		var erroLogin = context.Exception as LoginInvalidoException;
 		context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;

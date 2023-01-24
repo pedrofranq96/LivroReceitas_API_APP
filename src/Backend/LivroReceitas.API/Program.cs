@@ -1,4 +1,5 @@
 using LivroReceitas.API.Filtros;
+using LivroReceitas.API.Middleware;
 using LivroReceitas.Application;
 using LivroReceitas.Application.Servicos.AutoMapper;
 using LivroReceitas.Domain.Extension;
@@ -17,7 +18,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddRepositorio(builder.Configuration);
+builder.Services.AddInfra(builder.Configuration);
 builder.Services.AddApplication(builder.Configuration);
 
 builder.Services.AddMvc(options=> options.Filters.Add(typeof(FiltroDasExceptions)));
@@ -48,6 +49,8 @@ app.MapControllers();
 
 AtualizarBD();
 
+app.UseMiddleware<CultureMiddleware>();
+
 app.Run();
 
 void AtualizarBD()
@@ -67,5 +70,6 @@ void AtualizarBD()
 	}		
 }
 
-
+#pragma warning disable CA1050, S3903, S1118
 public partial class Program { }
+#pragma warning disable CA1050, S3903, S1118
