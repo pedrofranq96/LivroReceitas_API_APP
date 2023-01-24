@@ -1,5 +1,9 @@
-﻿namespace LivroReceitas.Exceptions.ExceptionsBase;
+﻿using System.Runtime.Serialization;
 
+namespace LivroReceitas.Exceptions.ExceptionsBase;
+
+
+[Serializable]
 public class LoginInvalidoException : LivroReceitasExceptions
 {
 
@@ -7,4 +11,5 @@ public class LoginInvalidoException : LivroReceitasExceptions
 	{
 
 	}
+	protected LoginInvalidoException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 }

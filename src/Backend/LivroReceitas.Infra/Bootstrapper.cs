@@ -13,9 +13,7 @@ namespace LivroReceitas.Infra;
 
 public static class Bootstrapper
 {
-
-
-	public static void AddRepositorio(this IServiceCollection services, IConfiguration configurationManager)
+	public static void AddInfra(this IServiceCollection services, IConfiguration configurationManager)
 	{
 		AddFluentMigrator(services, configurationManager);
 		AddContext(services, configurationManager);
@@ -24,7 +22,7 @@ public static class Bootstrapper
 	}
 	private static void AddContext(IServiceCollection services, IConfiguration configurationManager)
 	{
-		bool.TryParse(configurationManager.GetSection("Configuracoes:BancoDeDadosInMemory").Value, out bool bancoDeDadosInMemory);
+		_ = bool.TryParse(configurationManager.GetSection("Configuracoes:BancoDeDadosInMemory").Value, out bool bancoDeDadosInMemory);
 		if (!bancoDeDadosInMemory)
 		{
 			var versaoServidor = new MySqlServerVersion(new Version(8, 0, 32));
@@ -49,7 +47,7 @@ public static class Bootstrapper
 	}
 	private static void AddFluentMigrator(IServiceCollection services, IConfiguration configurationManager)
 	{
-		bool.TryParse(configurationManager.GetSection("Configuracoes:BancoDeDadosInMemory").Value, out bool bancoDeDadosInMemory);
+		_ = bool.TryParse(configurationManager.GetSection("Configuracoes:BancoDeDadosInMemory").Value, out bool bancoDeDadosInMemory);
 		if (!bancoDeDadosInMemory)
 		{
 			services.AddFluentMigratorCore().ConfigureRunner(c => c.AddMySql5()

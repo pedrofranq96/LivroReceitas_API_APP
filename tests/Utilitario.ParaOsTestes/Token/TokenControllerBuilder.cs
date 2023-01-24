@@ -7,6 +7,11 @@ public class TokenControllerBuilder
 {
 	public static TokenController Instancia()
 	{
-		return new TokenController(1000, "eVpwSjRENzRuJGQ5YypDcjBSNWgzSzExM15ub2gwTyp0OTk3YThRU1RpSUpeeVRyKlY=");
+		return new TokenController(1000, "NVkkYVRMQCRwdjVEU01qOGJGIzlCdk0kaXpwNTI4");
+	}
+	
+	public static TokenController TokenExpirado()
+	{
+		return new TokenController(0.0166667, "NVkkYVRMQCRwdjVEU01qOGJGIzlCdk0kaXpwNTI4");
 	}
 }
