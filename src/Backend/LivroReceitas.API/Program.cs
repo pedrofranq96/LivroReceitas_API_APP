@@ -29,7 +29,7 @@ builder.Services.AddScoped(provider => new AutoMapper.MapperConfiguration(cfg=>
 
 }).CreateMapper());
 
-builder.Services.AddScoped<UsuarioAutenticadoAtributo>();
+builder.Services.AddScoped<UsuarioAutenticadoAttribute>();
 
 
 var app = builder.Build();

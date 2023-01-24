@@ -4,7 +4,7 @@ namespace LivroReceitas.Exceptions.ExceptionsBase;
 
 
 [Serializable]
-public class ErrosDeValidacaoException : LivroReceitasExceptions
+public class ErrosDeValidacaoException : LivroReceitasException
 {
 	public List<string> MensagensDeErro { get; set; }
 
