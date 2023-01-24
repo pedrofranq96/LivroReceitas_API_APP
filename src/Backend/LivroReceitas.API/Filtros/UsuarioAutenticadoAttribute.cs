@@ -10,12 +10,12 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace LivroReceitas.API.Filtros;
 
-public class UsuarioAutenticadoAtributo : AuthorizeAttribute, IAsyncAuthorizationFilter
+public class UsuarioAutenticadoAttribute : AuthorizeAttribute, IAsyncAuthorizationFilter
 {
 	private readonly TokenController _tokenController;
 	private readonly IUsuarioReadOnlyRepositorio _repositorio;
 
-	public UsuarioAutenticadoAtributo(TokenController tokenController, IUsuarioReadOnlyRepositorio repositorio)
+	public UsuarioAutenticadoAttribute(TokenController tokenController, IUsuarioReadOnlyRepositorio repositorio)
 	{
 		_tokenController = tokenController;
 		_repositorio = repositorio;
@@ -32,7 +32,7 @@ public class UsuarioAutenticadoAtributo : AuthorizeAttribute, IAsyncAuthorizatio
 
 			if (usuario is null)
 			{
-				throw new LivroReceitasExceptions(string.Empty);
+				throw new LivroReceitasException(string.Empty);
 			}
 		}
 		catch (SecurityTokenExpiredException)
@@ -56,7 +56,7 @@ public class UsuarioAutenticadoAtributo : AuthorizeAttribute, IAsyncAuthorizatio
 
 		if (string.IsNullOrWhiteSpace(authorization))
 		{
-			throw new LivroReceitasExceptions(string.Empty);
+			throw new LivroReceitasException(string.Empty);
 		}
 		return authorization["Bearer".Length..].Trim();
 	}

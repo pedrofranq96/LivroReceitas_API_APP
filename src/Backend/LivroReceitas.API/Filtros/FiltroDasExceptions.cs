@@ -11,7 +11,7 @@ public class FiltroDasExceptions : IExceptionFilter
 {
 	public void OnException(ExceptionContext context)
 	{
-		if (context.Exception is LivroReceitasExceptions)
+		if (context.Exception is LivroReceitasException)
 		{
 			TratarLivroReceitasException(context);
 		}
