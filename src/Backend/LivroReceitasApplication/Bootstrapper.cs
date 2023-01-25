@@ -2,6 +2,7 @@
 using LivroReceitas.Application.Servicos.Token;
 using LivroReceitas.Application.Servicos.UsuarioLogado;
 using LivroReceitas.Application.UseCases.Login.FazerLogin;
+using LivroReceitas.Application.UseCases.Receita.Registrar;
 using LivroReceitas.Application.UseCases.Usuario.AlterarSenha;
 using LivroReceitas.Application.UseCases.Usuario.Registrar;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +15,7 @@ public static class Bootstrapper
 	public static void AddApplication(this IServiceCollection services, IConfiguration configuration)
 	{
 		AddChaveSenha(services, configuration);
+		AddHashIds(services, configuration);
 		AddTokenJWT(services, configuration);
 		AddUseCases(services);
 		AddUsuarioLogado(services);
@@ -36,11 +38,20 @@ public static class Bootstrapper
 		var sectionKey= configuration.GetRequiredSection("Configuracoes:Jwt:ChaveToken");
 		services.AddScoped(options => new TokenController(int.Parse(sectionTempoDeVida.Value), sectionKey.Value));
 	}
-
+	private static void AddHashIds(IServiceCollection services, IConfiguration configuration)
+	{
+		var salt = configuration.GetRequiredSection("Configuracoes:HashIds:Salt");
+		services.AddHashids(setup => 
+		{
+			setup.Salt = salt.Value;
+			setup.MinHashLength = 3;
+		});
+	}
 	private static void AddUseCases(this IServiceCollection services)
 	{
 		services.AddScoped<IRegistrarUsuarioUseCase, RegistrarUsuarioUseCase>()
 			.AddScoped<ILoginUseCase, LoginUseCase>()
-			.AddScoped<IAlterarSenhaUseCase, AlterarSenhaUseCase>();
+			.AddScoped<IAlterarSenhaUseCase, AlterarSenhaUseCase>()
+			.AddScoped<IRegistrarReceitaUseCase, RegistrarReceitaUseCase>();
 	}
 }
