@@ -8,6 +8,7 @@ public class Context :DbContext
 	public Context(DbContextOptions<Context> options): base(options) { }
 
 	public DbSet<Usuario> Usuarios { get; set; }
+	public DbSet<Receita> Receitas { get; set; }
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
 		modelBuilder.ApplyConfigurationsFromAssembly(typeof(Context).Assembly);
