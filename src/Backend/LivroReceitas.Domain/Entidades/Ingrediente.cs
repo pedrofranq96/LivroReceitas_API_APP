@@ -1,4 +1,7 @@
-﻿namespace LivroReceitas.Domain.Entidades;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace LivroReceitas.Domain.Entidades;
+[Table("Ingredientes")]
 public class Ingrediente :EntidadeBase
 {
 	public string Produto { get; set; }
