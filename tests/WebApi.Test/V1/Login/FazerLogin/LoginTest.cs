@@ -3,7 +3,6 @@ using LivroReceitas.Comunicacao.Requesicoes;
 using LivroReceitas.Exceptions;
 using System.Net;
 using System.Text.Json;
-using UtilitarioParaOsTestes.Requisicoes;
 using Xunit;
 
 namespace WebApi.Test.V1.Login.FazerLogin;
