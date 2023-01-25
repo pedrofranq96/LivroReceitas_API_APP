@@ -115,6 +115,15 @@ namespace LivroReceitas.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Receita deve conter no mínimo 1 ingrediente..
+        /// </summary>
+        public static string RECEITA_MINIMO_UM_INGREDIENTE {
+            get {
+                return ResourceManager.GetString("RECEITA_MINIMO_UM_INGREDIENTE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A senha atual é inválida..
         /// </summary>
         public static string SENHA_ATUAL_INVALIDA {

@@ -57,7 +57,7 @@ public class RegistrarUsuarioUseCaseTeste
 	{
 		var mapper = MapperBuilder.Instancia();
 		var repositorio = UsuarioWriteOnlyRepositorioBuilder.Intancia().Construir();
-		var unidadeDeTrabalho = UnidadeDeTrabalhoBuilder.Intancia().Construir();
+		var unidadeDeTrabalho = UnidadeDeTrabalhoBuilder.Instancia().Construir();
 		var encriptador = EncriptadorDeSenhaBuilder.Instancia();
 		var token = TokenControllerBuilder.Instancia();
 		var repositoruioReadOnly = UsuarioReadOnlyRepositorioBuilder.Intancia().ExiteUsuarioComEmail(email).Construir();

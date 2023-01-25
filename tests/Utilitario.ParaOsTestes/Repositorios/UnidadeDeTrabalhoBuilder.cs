@@ -10,10 +10,13 @@ public class UnidadeDeTrabalhoBuilder
 
 	private UnidadeDeTrabalhoBuilder()
 	{
-		if (_repositorio == null) _repositorio = new Mock<IUnidadeDeTrabalho>();
+		if (_repositorio is null)
+		{
+			_repositorio = new Mock<IUnidadeDeTrabalho>();
+		}
 	}
 
-	public static UnidadeDeTrabalhoBuilder Intancia()
+	public static UnidadeDeTrabalhoBuilder Instancia()
 	{
 		_instance = new UnidadeDeTrabalhoBuilder();
 		return _instance;
