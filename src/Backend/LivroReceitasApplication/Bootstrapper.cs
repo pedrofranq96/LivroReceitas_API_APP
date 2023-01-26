@@ -4,6 +4,7 @@ using LivroReceitas.Application.Servicos.UsuarioLogado;
 using LivroReceitas.Application.UseCases.DashBoard;
 using LivroReceitas.Application.UseCases.Login.FazerLogin;
 using LivroReceitas.Application.UseCases.Receita.Atualizar;
+using LivroReceitas.Application.UseCases.Receita.Excluir;
 using LivroReceitas.Application.UseCases.Receita.RecuperarPorId;
 using LivroReceitas.Application.UseCases.Receita.Registrar;
 using LivroReceitas.Application.UseCases.Usuario.AlterarSenha;
@@ -35,7 +36,7 @@ public static class Bootstrapper
 		var section = configuration.GetRequiredSection("Configuracoes:Senha:ChaveAdicionalSenha");
 		services.AddScoped(options => new EncriptadorDeSenha(section.Value));
 	}
-	private static void AddTokenJWT(this IServiceCollection services, IConfiguration configuration)
+	private static void AddTokenJWT(IServiceCollection services, IConfiguration configuration)
 	{
 		var sectionTempoDeVida = configuration.GetRequiredSection("Configuracoes:Jwt:TempoDeVidaTokenMinutos");
 		var sectionKey= configuration.GetRequiredSection("Configuracoes:Jwt:ChaveToken");
@@ -50,7 +51,7 @@ public static class Bootstrapper
 			setup.MinHashLength = 3;
 		});
 	}
-	private static void AddUseCases(this IServiceCollection services)
+	private static void AddUseCases(IServiceCollection services)
 	{
 		services.AddScoped<IRegistrarUsuarioUseCase, RegistrarUsuarioUseCase>()
 			.AddScoped<ILoginUseCase, LoginUseCase>()
@@ -58,6 +59,9 @@ public static class Bootstrapper
 			.AddScoped<IRegistrarReceitaUseCase, RegistrarReceitaUseCase>()
 			.AddScoped<IDashBoardUseCase, DashBoardUseCase>()
 			.AddScoped<IRecuperarReceitaPorIdUseCase, RecuperarReceitaPorIdUseCase>()
-			.AddScoped<IReceitaAtualizarUseCase, ReceitaAtualizarUseCase>();
+			.AddScoped<IReceitaAtualizarUseCase, ReceitaAtualizarUseCase>()
+			.AddScoped<IDeletarReceitaUseCase, DeletarReceitaUseCase>();
+
+
 	}
 }

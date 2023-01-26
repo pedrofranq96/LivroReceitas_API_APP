@@ -1,4 +1,5 @@
 ﻿using FluentMigrator;
+using System.Data;
 
 namespace LivroReceitas.Infra.Migrations.Versoes;
 
@@ -31,7 +32,7 @@ public class Versao0000002 : Migration
 		tabela
 			.WithColumn("Produto").AsString(100).NotNullable()
 			.WithColumn("Quantidade").AsString().NotNullable()
-			.WithColumn("ReceitaId").AsInt64().NotNullable().ForeignKey("FK_Ingrediente_Receita_Id", "Receitas", "Id");
+			.WithColumn("ReceitaId").AsInt64().NotNullable().ForeignKey("FK_Ingrediente_Receita_Id", "Receitas", "Id").OnDeleteOrUpdate(Rule.Cascade);
 			
 	}
 
