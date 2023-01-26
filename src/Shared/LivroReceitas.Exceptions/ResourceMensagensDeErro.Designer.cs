@@ -61,6 +61,15 @@ namespace LivroReceitas.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A categoria é invalida..
+        /// </summary>
+        public static string CATEGORIA_RECEITA_INVALIDA {
+            get {
+                return ResourceManager.GetString("CATEGORIA_RECEITA_INVALIDA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O email informado já está registrado na base de dados..
         /// </summary>
         public static string EMAIL_JA_REGISTRADO {
@@ -106,11 +115,47 @@ namespace LivroReceitas.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to O modo preparo está vazio..
+        /// </summary>
+        public static string MODOPREPARO_RECEITA_EMBRANCO {
+            get {
+                return ResourceManager.GetString("MODOPREPARO_RECEITA_EMBRANCO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O nome do usuário deve ser informado..
         /// </summary>
         public static string NOME_USUARIO_EMBRANCO {
             get {
                 return ResourceManager.GetString("NOME_USUARIO_EMBRANCO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O produto está vazio.
+        /// </summary>
+        public static string RECEITA_INGREDIENTE_PRODUTO_EMBRANCO {
+            get {
+                return ResourceManager.GetString("RECEITA_INGREDIENTE_PRODUTO_EMBRANCO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A quantidade do produto está vazio..
+        /// </summary>
+        public static string RECEITA_INGREDIENTE_QUANTIDADE_EMBRANCO {
+            get {
+                return ResourceManager.GetString("RECEITA_INGREDIENTE_QUANTIDADE_EMBRANCO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ingrediente já existe na base de dados..
+        /// </summary>
+        public static string RECEITA_INGREDIENTE_REPETIDO {
+            get {
+                return ResourceManager.GetString("RECEITA_INGREDIENTE_REPETIDO", resourceCulture);
             }
         }
         
@@ -174,6 +219,15 @@ namespace LivroReceitas.Exceptions {
         public static string TELEFONE_USUARIO_INVALIDO {
             get {
                 return ResourceManager.GetString("TELEFONE_USUARIO_INVALIDO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O titulo da receita está em vazio..
+        /// </summary>
+        public static string TITULO_RECEITA_EMBRANCO {
+            get {
+                return ResourceManager.GetString("TITULO_RECEITA_EMBRANCO", resourceCulture);
             }
         }
         

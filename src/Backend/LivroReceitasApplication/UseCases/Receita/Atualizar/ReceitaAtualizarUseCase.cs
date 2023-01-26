@@ -5,6 +5,7 @@ using LivroReceitas.Domain.Repositorio.Receita;
 using LivroReceitas.Exceptions.ExceptionsBase;
 using LivroReceitas.Exceptions;
 using LivroReceitas.Domain.Repositorio;
+using LivroReceitas.Application.UseCases.Receita.Registrar;
 
 namespace LivroReceitas.Application.UseCases.Receita.Atualizar;
 public class ReceitaAtualizarUseCase : IReceitaAtualizarUseCase
@@ -29,7 +30,7 @@ public class ReceitaAtualizarUseCase : IReceitaAtualizarUseCase
 
 		var receita = await _repositorio.RecuperarPorId(id);
 		
-		Validar(usuarioLogado, receita);
+		Validar(usuarioLogado,receita, requisicao);
 		
 		_mapper.Map(requisicao, receita);
 
@@ -38,11 +39,19 @@ public class ReceitaAtualizarUseCase : IReceitaAtualizarUseCase
 		await _unidadeDeTrabalho.Commit();
 	}
 
-	public void Validar(Domain.Entidades.Usuario usuarioLogado, Domain.Entidades.Receita receita)
+	public void Validar(Domain.Entidades.Usuario usuarioLogado, Domain.Entidades.Receita receita, RequisicaoReceitaJson requisicao)
 	{
 		if (receita == null || receita.UsuarioId != usuarioLogado.Id)
 		{
 			throw new ErrosDeValidacaoException(new List<string> { ResourceMensagensDeErro.RECEITA_NAO_ENCONTRADA });
+		}
+
+		var validator = new RegistrarReceitaValidator();
+		var resultado = validator.Validate(requisicao);
+		if (!resultado.IsValid)
+		{
+			var mensagensDeErro = resultado.Errors.Select(c => c.ErrorMessage).ToList();
+			throw new ErrosDeValidacaoException(mensagensDeErro);
 		}
 	}
 }
