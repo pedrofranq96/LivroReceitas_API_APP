@@ -135,6 +135,9 @@
   <data name="NOME_USUARIO_EMBRANCO" xml:space="preserve">
     <value>The user's name is required.</value>
   </data>
+  <data name="RECEITA_NAO_ENCONTRADA" xml:space="preserve">
+    <value>Receita não encontrada.</value>
+  </data>
   <data name="SENHA_ATUAL_INVALIDA" xml:space="preserve">
     <value>Current password invalid.</value>
   </data>
