@@ -2,6 +2,7 @@
 using System.Net;
 using UtilitarioParaOsTestes.Requisicoes;
 using UtilitarioParaOsTestes.Token;
+using WebApi.Test.V1.ErroDesconhecido;
 using Xunit;
 
 namespace WebApi.Test.V1.Usuario.AlterarSenha;
