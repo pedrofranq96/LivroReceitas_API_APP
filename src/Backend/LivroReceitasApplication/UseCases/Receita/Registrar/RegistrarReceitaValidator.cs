@@ -4,7 +4,7 @@ using LivroReceitas.Comunicacao.Requesicoes;
 using LivroReceitas.Domain.Entidades;
 
 namespace LivroReceitas.Application.UseCases.Receita.Registrar;
-public class RegistrarReceitaValidator : AbstractValidator<RequisicaoRegistrarReceitaJson>
+public class RegistrarReceitaValidator : AbstractValidator<RequisicaoReceitaJson>
 {
 	public RegistrarReceitaValidator()
 	{

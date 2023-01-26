@@ -5,9 +5,9 @@ using LivroReceitas.Comunicacao.Requesicoes;
 namespace UtilitarioParaOsTestes.Requisicoes;
 public class RequisicaoReceitaBuilder
 {
-	public static RequisicaoRegistrarReceitaJson Construir()
+	public static RequisicaoReceitaJson Construir()
 	{
-		return new Faker<RequisicaoRegistrarReceitaJson>()
+		return new Faker<RequisicaoReceitaJson>()
 			.RuleFor(c => c.Titulo, f => f.Commerce.Department())
 			.RuleFor(c => c.Categoria, f => f.PickRandom<Categoria>())
 			.RuleFor(c => c.ModoPreparo, f => f.Lorem.Paragraph())
@@ -15,13 +15,13 @@ public class RequisicaoReceitaBuilder
 			
 	}
 
-	private static List<RequisicaoRegistrarIngredienteJson> RandomIngredientes(Faker f)
+	private static List<RequisicaoIngredienteJson> RandomIngredientes(Faker f)
 	{
-		List<RequisicaoRegistrarIngredienteJson> ingredientes = new();
+		List<RequisicaoIngredienteJson> ingredientes = new();
 
 		for (int i = 0; i < f.Random.Int(1, 10); i++)
 		{
-			ingredientes.Add(new RequisicaoRegistrarIngredienteJson
+			ingredientes.Add(new RequisicaoIngredienteJson
 			{
 				Produto = f.Commerce.ProductName(),
 				Quantidade = $"{f.Random.Double(1, 10)} {f.Random.Word()}"
