@@ -138,6 +138,9 @@
   <data name="RECEITA_MINIMO_UM_INGREDIENTE" xml:space="preserve">
     <value>Receita deve conter no mínimo 1 ingrediente.</value>
   </data>
+  <data name="RECEITA_NAO_ENCONTRADA" xml:space="preserve">
+    <value>Receita não encontrada.</value>
+  </data>
   <data name="SENHA_ATUAL_INVALIDA" xml:space="preserve">
     <value>A senha atual é inválida.</value>
   </data>
