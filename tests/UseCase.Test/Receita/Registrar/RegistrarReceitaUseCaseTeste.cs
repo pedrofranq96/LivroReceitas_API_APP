@@ -32,6 +32,22 @@ public class RegistrarReceitaUseCaseTeste
 	
 	}
 
+	[Fact]
+	public async Task Validar_Erro_Email_Vazio()
+	{
+		(var usuario, var senha) = UsuarioBuilder.Construir();
+
+		var useCase = CriarUseCase(usuario);
+
+		var requisicao = RequisicaoReceitaBuilder.Construir();
+		requisicao.Ingredientes.Clear();
+
+		Func<Task> acao = async () => { await useCase.Executar(requisicao); };
+
+		await acao.Should().ThrowAsync<ErrosDeValidacaoException>()
+			.Where(exception => exception.MensagensDeErro.Count == 1 && exception.MensagensDeErro.Contains(ResourceMensagensDeErro.RECEITA_MINIMO_UM_INGREDIENTE));
+	}
+
 
 	private static RegistrarReceitaUseCase CriarUseCase(LivroReceitas.Domain.Entidades.Usuario usuario)
 	{

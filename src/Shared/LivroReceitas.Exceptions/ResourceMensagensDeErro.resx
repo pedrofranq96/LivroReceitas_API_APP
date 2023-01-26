@@ -171,6 +171,9 @@
   <data name="TELEFONE_USUARIO_INVALIDO" xml:space="preserve">
     <value>O telefone do usuário deve estar no formato XX X XXXX-XXXX</value>
   </data>
+  <data name="TEMPO_PREPARO_INVALIDO" xml:space="preserve">
+    <value>Tempo de preparo precisa ser valido.</value>
+  </data>
   <data name="TITULO_RECEITA_EMBRANCO" xml:space="preserve">
     <value>O titulo da receita está em vazio.</value>
   </data>
