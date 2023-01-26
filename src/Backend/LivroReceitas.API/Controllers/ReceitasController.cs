@@ -1,4 +1,6 @@
-﻿using LivroReceitas.API.Filtros;
+﻿using LivroReceitas.API.Binder;
+using LivroReceitas.API.Filtros;
+using LivroReceitas.Application.UseCases.Receita.RecuperarPorId;
 using LivroReceitas.Application.UseCases.Receita.Registrar;
 using LivroReceitas.Comunicacao.Requesicoes;
 using LivroReceitas.Comunicacao.Respostas;
@@ -18,5 +20,15 @@ public class ReceitasController : LivroReceitasController
 	{
 		var resposta = await useCase.Executar(requisicao);
 		return Created(string.Empty, resposta);
+	}
+	
+	[HttpGet]
+	[Route("{id:hashids}")]
+	[ProducesResponseType(typeof(RespostaReceitaJson), StatusCodes.Status200OK)]
+	public async Task<IActionResult> RecuperarPorId([FromServices] IRecuperarReceitaPorIdUseCase useCase,
+		[FromRoute] [ModelBinder(typeof(HashidsModelBinder))]long id)
+	{
+		var resposta = await useCase.Executar(id);
+		return Ok(resposta);
 	}
 }
