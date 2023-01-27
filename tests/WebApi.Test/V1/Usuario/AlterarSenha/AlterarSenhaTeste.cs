@@ -1,10 +1,8 @@
 ﻿using FluentAssertions;
-using LivroReceitas.Comunicacao.Requesicoes;
 using LivroReceitas.Exceptions;
 using System.Net;
 using System.Text.Json;
 using UtilitarioParaOsTestes.Requisicoes;
-using WebApi.Test.V1.ErroDesconhecido;
 using Xunit;
 
 namespace WebApi.Test.V1.Usuario.AlterarSenha;

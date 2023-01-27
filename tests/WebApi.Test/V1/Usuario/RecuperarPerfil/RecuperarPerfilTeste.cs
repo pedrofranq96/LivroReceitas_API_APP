@@ -1,7 +1,6 @@
 ﻿using FluentAssertions;
 using System.Net;
 using System.Text.Json;
-using WebApi.Test.V1.ErroDesconhecido;
 using Xunit;
 
 namespace WebApi.Test.V1.Usuario.RecuperarPerfil;

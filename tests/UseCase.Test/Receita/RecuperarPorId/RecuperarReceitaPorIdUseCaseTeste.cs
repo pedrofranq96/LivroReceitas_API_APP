@@ -5,7 +5,7 @@ using LivroReceitas.Exceptions;
 using UtilitarioParaOsTestes.Entidades;
 using UtilitarioParaOsTestes.UsuarioLogado;
 using Xunit;
-using Utilitario.ParaOsTestes.Mapper;
+using UtilitarioParaOsTestes.Mapper;
 
 namespace UseCase.Test.Receita.RecuperarPorId;
 public class RecuperarReceitaPorIdUseCaseTeste

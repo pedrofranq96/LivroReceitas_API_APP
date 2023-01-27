@@ -1,13 +1,9 @@
 ﻿using FluentAssertions;
 using LivroReceitas.Exceptions;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace WebApi.Test.V1.ErroDesconhecido;

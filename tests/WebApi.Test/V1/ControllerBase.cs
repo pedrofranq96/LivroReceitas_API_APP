@@ -1,11 +1,9 @@
 ﻿using LivroReceitas.Comunicacao.Requesicoes;
-using LivroReceitas.Domain.Entidades;
 using LivroReceitas.Exceptions;
 using Newtonsoft.Json;
 using System.Globalization;
 using System.Text;
 using System.Text.Json;
-using WebApi.Test.V1.ErroDesconhecido;
 using Xunit;
 
 namespace WebApi.Test.V1;

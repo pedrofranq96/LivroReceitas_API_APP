@@ -1,5 +1,4 @@
 ﻿using LivroReceitas.Application.UseCases.Login.FazerLogin;
-using LivroReceitas.Domain.Entidades;
 using LivroReceitas.Infra.AcessoRepositorio;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;

@@ -1,7 +1,6 @@
 ﻿using FluentAssertions;
 using LivroReceitas.Application.UseCases.DashBoard;
 using LivroReceitas.Comunicacao.Requesicoes;
-using Utilitario.ParaOsTestes.Mapper;
 using UtilitarioParaOsTestes.Entidades;
 using UtilitarioParaOsTestes.Repositorios;
 using UtilitarioParaOsTestes.UsuarioLogado;
