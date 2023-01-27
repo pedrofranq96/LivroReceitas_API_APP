@@ -41,7 +41,7 @@ public class ReceitaAtualizarUseCase : IReceitaAtualizarUseCase
 
 	public void Validar(Domain.Entidades.Usuario usuarioLogado, Domain.Entidades.Receita receita, RequisicaoReceitaJson requisicao)
 	{
-		if (receita == null || receita.UsuarioId != usuarioLogado.Id)
+		if (receita is null || receita.UsuarioId != usuarioLogado.Id)
 		{
 			throw new ErrosDeValidacaoException(new List<string> { ResourceMensagensDeErro.RECEITA_NAO_ENCONTRADA });
 		}
