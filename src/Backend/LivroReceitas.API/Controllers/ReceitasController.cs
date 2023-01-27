@@ -1,5 +1,5 @@
 ﻿using LivroReceitas.API.Binder;
-using LivroReceitas.API.Filtros;
+using LivroReceitas.API.Filtros.UsuarioLogado;
 using LivroReceitas.Application.UseCases.Receita.Atualizar;
 using LivroReceitas.Application.UseCases.Receita.Excluir;
 using LivroReceitas.Application.UseCases.Receita.RecuperarPorId;

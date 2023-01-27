@@ -1,4 +1,4 @@
-using LivroReceitas.API.Filtros;
+using LivroReceitas.API.Filtros.UsuarioLogado;
 using LivroReceitas.Application.UseCases.DashBoard;
 using LivroReceitas.Comunicacao.Requesicoes;
 using LivroReceitas.Comunicacao.Respostas;
