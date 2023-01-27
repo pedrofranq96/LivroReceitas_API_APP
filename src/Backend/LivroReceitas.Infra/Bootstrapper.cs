@@ -9,6 +9,7 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using LivroReceitas.Domain.Repositorio.Usuario;
 using LivroReceitas.Domain.Repositorio.Receita;
+using LivroReceitas.Domain.Repositorio.Codigos;
 
 namespace LivroReceitas.Infra;
 
@@ -47,7 +48,8 @@ public static class Bootstrapper
 			.AddScoped<IUsuarioUpdateOnlyRepositorio, UsuarioRepositorio>()
 			.AddScoped<IReceitaWriteOnlyRepositorio, ReceitaRepositorio>()
 			.AddScoped<IReceitaReadOnlyRepositorio, ReceitaRepositorio>()
-			.AddScoped<IReceitaUpdateOnlyRepositorio, ReceitaRepositorio>();
+			.AddScoped<IReceitaUpdateOnlyRepositorio, ReceitaRepositorio>()
+			.AddScoped<ICodigoWriteOnlyRepositorio, CodigoRepositorio>();
 	}
 	private static void AddFluentMigrator(IServiceCollection services, IConfiguration configurationManager)
 	{
