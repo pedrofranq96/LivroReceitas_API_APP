@@ -1,6 +1,7 @@
 ﻿using LivroReceitas.Application.Servicos.Criptografia;
 using LivroReceitas.Application.Servicos.Token;
 using LivroReceitas.Application.Servicos.UsuarioLogado;
+using LivroReceitas.Application.UseCases.Conexao.GerarQRCode;
 using LivroReceitas.Application.UseCases.DashBoard;
 using LivroReceitas.Application.UseCases.Login.FazerLogin;
 using LivroReceitas.Application.UseCases.Receita.Atualizar;
@@ -62,7 +63,8 @@ public static class Bootstrapper
 			.AddScoped<IRecuperarReceitaPorIdUseCase, RecuperarReceitaPorIdUseCase>()
 			.AddScoped<IReceitaAtualizarUseCase, ReceitaAtualizarUseCase>()
 			.AddScoped<IDeletarReceitaUseCase, DeletarReceitaUseCase>()
-			.AddScoped<IRecuperarPerfilUseCase, RecuperarPerfilUseCase>();
+			.AddScoped<IRecuperarPerfilUseCase, RecuperarPerfilUseCase>()
+			.AddScoped<IGerarQRCodeUseCase, GerarQRCodeUseCase>();
 
 
 	}
