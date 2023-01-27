@@ -8,6 +8,7 @@ using LivroReceitas.Application.UseCases.Receita.Excluir;
 using LivroReceitas.Application.UseCases.Receita.RecuperarPorId;
 using LivroReceitas.Application.UseCases.Receita.Registrar;
 using LivroReceitas.Application.UseCases.Usuario.AlterarSenha;
+using LivroReceitas.Application.UseCases.Usuario.RecuperarPerfil;
 using LivroReceitas.Application.UseCases.Usuario.Registrar;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -60,7 +61,8 @@ public static class Bootstrapper
 			.AddScoped<IDashBoardUseCase, DashBoardUseCase>()
 			.AddScoped<IRecuperarReceitaPorIdUseCase, RecuperarReceitaPorIdUseCase>()
 			.AddScoped<IReceitaAtualizarUseCase, ReceitaAtualizarUseCase>()
-			.AddScoped<IDeletarReceitaUseCase, DeletarReceitaUseCase>();
+			.AddScoped<IDeletarReceitaUseCase, DeletarReceitaUseCase>()
+			.AddScoped<IRecuperarPerfilUseCase, RecuperarPerfilUseCase>();
 
 
 	}
