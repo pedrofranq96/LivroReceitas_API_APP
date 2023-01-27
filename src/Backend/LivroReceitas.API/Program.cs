@@ -1,13 +1,16 @@
 using HashidsNet;
 using LivroReceitas.API.Filtros;
 using LivroReceitas.API.Filtros.Swagger;
+using LivroReceitas.API.Filtros.UsuarioLogado;
 using LivroReceitas.API.Middleware;
+using LivroReceitas.API.WebSockets;
 using LivroReceitas.Application;
 using LivroReceitas.Application.Servicos.AutoMapper;
 using LivroReceitas.Domain.Extension;
 using LivroReceitas.Infra;
 using LivroReceitas.Infra.AcessoRepositorio;
 using LivroReceitas.Infra.Migrations;
+using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -57,8 +60,18 @@ builder.Services.AddScoped(provider => new AutoMapper.MapperConfiguration(cfg=>
 
 }).CreateMapper());
 
+
+builder.Services.AddScoped<IAuthorizationHandler, UsuarioLogadoHandler>();
+builder.Services.AddAuthorization(option =>
+{
+	option.AddPolicy("UsuarioLogado", policy => policy.Requirements.Add(new UsuarioLogadoRequirement()));
+});
+
 builder.Services.AddScoped<UsuarioAutenticadoAttribute>();
 
+builder.Services.AddHealthChecks();
+
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -78,6 +91,7 @@ app.MapControllers();
 AtualizarBD();
 
 app.UseMiddleware<CultureMiddleware>();
+app.MapHub<AdicionarConexao>("/addConexao");
 
 app.Run();
 
