@@ -28,9 +28,4 @@
     <ProjectReference Include="..\Utilitario.ParaOsTestes\UtilitarioParaOsTestes.csproj" />
   </ItemGroup>
 
-
-  <ItemGroup>
-    <Folder Include="Conexao\" />
-  </ItemGroup>
-
 </Project>
