@@ -250,6 +250,24 @@ namespace LivroReceitas.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Usuário não está conectado..
+        /// </summary>
+        public static string USUARIO_NAO_CONECTADO {
+            get {
+                return ResourceManager.GetString("USUARIO_NAO_CONECTADO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Usuario não encontrado.
+        /// </summary>
+        public static string USUARIO_NAO_ENCONTRADO {
+            get {
+                return ResourceManager.GetString("USUARIO_NAO_ENCONTRADO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Você não tem permissão para acessar este recurso..
         /// </summary>
         public static string USUARIO_SEM_PERMISSAO {

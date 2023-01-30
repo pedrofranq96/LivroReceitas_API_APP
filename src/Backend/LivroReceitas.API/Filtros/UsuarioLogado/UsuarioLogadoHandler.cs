@@ -1,9 +1,7 @@
 ﻿using LivroReceitas.Application.Servicos.Token;
-using LivroReceitas.Domain.Entidades;
 using LivroReceitas.Domain.Repositorio.Usuario;
-using LivroReceitas.Exceptions.ExceptionsBase;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Filters;
+using System.Threading.Tasks;
 
 namespace LivroReceitas.API.Filtros.UsuarioLogado;
 
@@ -45,8 +43,12 @@ public class UsuarioLogadoHandler : AuthorizationHandler<UsuarioLogadoRequiremen
 			}
 
 			context.Succeed(requirement);
-		}	
+		}
 		catch 
-		{ context.Fail(); }		
+		{
+			context.Fail();
+		}
+		
 	}
+
 }

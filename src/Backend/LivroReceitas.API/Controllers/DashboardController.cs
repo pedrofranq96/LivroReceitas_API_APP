@@ -6,13 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LivroReceitas.API.Controllers;
 
-
+[ServiceFilter(typeof(UsuarioAutenticadoAttribute))]
 public class DashboardController : LivroReceitasController
 {	
 	[HttpPut]
 	[ProducesResponseType(typeof(RespostaDashBoardJson), StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status204NoContent)]
-	[ServiceFilter(typeof(UsuarioAutenticadoAttribute))]
 	public async Task<IActionResult> RecuperarDashboard(
 		[FromServices]IDashBoardUseCase useCase,
 		[FromBody] RequisicaoDashBoardJson request)

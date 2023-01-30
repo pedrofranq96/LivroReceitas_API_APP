@@ -180,6 +180,12 @@
   <data name="TOKEN_EXPIRADO" xml:space="preserve">
     <value>Faça login novamente no App.</value>
   </data>
+  <data name="USUARIO_NAO_CONECTADO" xml:space="preserve">
+    <value>Usuário não está conectado.</value>
+  </data>
+  <data name="USUARIO_NAO_ENCONTRADO" xml:space="preserve">
+    <value>Usuario não encontrado</value>
+  </data>
   <data name="USUARIO_SEM_PERMISSAO" xml:space="preserve">
     <value>Você não tem permissão para acessar este recurso.</value>
   </data>
