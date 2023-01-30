@@ -70,6 +70,15 @@ namespace LivroReceitas.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to QRCode não encontrado..
+        /// </summary>
+        public static string CODIGO_NAO_ENCONTRADO {
+            get {
+                return ResourceManager.GetString("CODIGO_NAO_ENCONTRADO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O email informado já está registrado na base de dados..
         /// </summary>
         public static string EMAIL_JA_REGISTRADO {
@@ -102,6 +111,15 @@ namespace LivroReceitas.Exceptions {
         public static string ERRO_DESCONHECIDO {
             get {
                 return ResourceManager.GetString("ERRO_DESCONHECIDO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A conexao executada já existe..
+        /// </summary>
+        public static string ESTA_CONEXAO_JA_EXISTE {
+            get {
+                return ResourceManager.GetString("ESTA_CONEXAO_JA_EXISTE", resourceCulture);
             }
         }
         
@@ -273,6 +291,15 @@ namespace LivroReceitas.Exceptions {
         public static string USUARIO_SEM_PERMISSAO {
             get {
                 return ResourceManager.GetString("USUARIO_SEM_PERMISSAO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Você não tem autorização para executar esta operacao..
+        /// </summary>
+        public static string VOCE_NAO_PODE_EXECUTAR_ESTA_OPERACAO {
+            get {
+                return ResourceManager.GetString("VOCE_NAO_PODE_EXECUTAR_ESTA_OPERACAO", resourceCulture);
             }
         }
     }

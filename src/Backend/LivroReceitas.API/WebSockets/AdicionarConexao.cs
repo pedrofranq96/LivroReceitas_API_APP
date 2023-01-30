@@ -14,12 +14,13 @@ public class AdicionarConexao : Hub
 {
 	private readonly Broadcaster _broadcaster;
 
-	private readonly IRecusarConexaoUseCase _recusarConexaoUseCase;
+	
 	private readonly IAceitarConexaoUseCase _aceitarConexaoUseCase;
+	private readonly IRecusarConexaoUseCase _recusarConexaoUseCase;
 	private readonly IQRCodeLidoUseCase _gerarQRCodelido;
 	private readonly IGerarQRCodeUseCase _gerarQRCodeUseCase;
 	private readonly IHubContext<AdicionarConexao> _hubContext;
-	public AdicionarConexao(IRecusarConexaoUseCase recusarConexaoUseCase,IQRCodeLidoUseCase gerarQRCodelido,
+	public AdicionarConexao(IQRCodeLidoUseCase gerarQRCodelido, IRecusarConexaoUseCase recusarConexaoUseCase,
 		IHubContext<AdicionarConexao> hubContext,IGerarQRCodeUseCase gerarQRCodeUseCase, IAceitarConexaoUseCase aceitarConexaoUseCase)
 	{
 		_broadcaster = Broadcaster.Instance;
@@ -55,12 +56,12 @@ public class AdicionarConexao : Hub
 	{
 		try
 		{
-			(var usuarioParaSeConectar, var idUsuarioGerouQRCode) = await _gerarQRCodelido.Executar(codigoConexao);
+			(var usuarioParaSeConectar, var idUsuarioQueGerouQRCode) = await _gerarQRCodelido.Executar(codigoConexao);
 
-			var connectionId =  _broadcaster.GetConnectionIdUsuario(idUsuarioGerouQRCode);
+			var connectionId = _broadcaster.GetConnectionIdDoUsuario(idUsuarioQueGerouQRCode);
 
 			_broadcaster.ResetarTempoExpiracao(connectionId);
-			_broadcaster.SetConnectionIdUsuarioLeitorQRCode(idUsuarioGerouQRCode, Context.ConnectionId);
+			_broadcaster.SetConnectionIdUsuarioLeitorQRCode(idUsuarioQueGerouQRCode, Context.ConnectionId);
 
 			await Clients.Client(connectionId).SendAsync("ResultadoQRCodeLido", usuarioParaSeConectar);
 		}
@@ -68,10 +69,10 @@ public class AdicionarConexao : Hub
 		{
 			await Clients.Caller.SendAsync("Erro", ex.Message);
 		}
-		catch 
+		catch
 		{
 			await Clients.Caller.SendAsync("Erro", ResourceMensagensDeErro.ERRO_DESCONHECIDO);
-		}	
+		}
 	}
 
 	public async Task RecusarConexao()

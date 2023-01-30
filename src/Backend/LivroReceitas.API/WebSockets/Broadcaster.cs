@@ -35,11 +35,11 @@ public class Broadcaster
 		_dictionary.TryRemove(connectionId, out _);
 	}
 
-	public string GetConnectionIdUsuario(string usuarioId)
+	public string GetConnectionIdDoUsuario(string usuarioId)
 	{
 		if (!_dictionary.TryGetValue(usuarioId, out var connectionId))
 		{
-			throw new LivroReceitasException("");
+			throw new LivroReceitasException(ResourceMensagensDeErro.USUARIO_NAO_ENCONTRADO);
 		}
 
 		return connectionId.ToString();
@@ -57,7 +57,7 @@ public class Broadcaster
 
 	public void SetConnectionIdUsuarioLeitorQRCode(string idUsuarioGerouQRCode, string connectionIdUsuarioLeitorQRCode)
 	{
-		var connectionIdUsuarioQueLeuQRCode = GetConnectionIdUsuario(idUsuarioGerouQRCode);
+		var connectionIdUsuarioQueLeuQRCode = GetConnectionIdDoUsuario(idUsuarioGerouQRCode);
 
 		_dictionary.TryGetValue(connectionIdUsuarioQueLeuQRCode, out var objetoConexao);
 
