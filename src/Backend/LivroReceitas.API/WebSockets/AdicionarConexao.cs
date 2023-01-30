@@ -1,5 +1,9 @@
-﻿using LivroReceitas.Application.UseCases.Conexao.GerarQRCode;
-using LivroReceitas.Domain.Entidades;
+﻿using LivroReceitas.Application.UseCases.Conexao.AceitarConexao;
+using LivroReceitas.Application.UseCases.Conexao.GerarQRCode;
+using LivroReceitas.Application.UseCases.Conexao.QRCodeLido;
+using LivroReceitas.Application.UseCases.Conexao.RecusarConexao;
+using LivroReceitas.Exceptions;
+using LivroReceitas.Exceptions.ExceptionsBase;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 
@@ -8,23 +12,109 @@ namespace LivroReceitas.API.WebSockets;
 [Authorize(Policy = "UsuarioLogado")]
 public class AdicionarConexao : Hub
 {
-	private readonly IHubContext<AdicionarConexao> _hubContext;
 	private readonly Broadcaster _broadcaster;
+
+	private readonly IRecusarConexaoUseCase _recusarConexaoUseCase;
+	private readonly IAceitarConexaoUseCase _aceitarConexaoUseCase;
+	private readonly IQRCodeLidoUseCase _gerarQRCodelido;
 	private readonly IGerarQRCodeUseCase _gerarQRCodeUseCase;
-	public AdicionarConexao(IHubContext<AdicionarConexao> hubContext,IGerarQRCodeUseCase gerarQRCodeUseCase)
+	private readonly IHubContext<AdicionarConexao> _hubContext;
+	public AdicionarConexao(IRecusarConexaoUseCase recusarConexaoUseCase,IQRCodeLidoUseCase gerarQRCodelido,
+		IHubContext<AdicionarConexao> hubContext,IGerarQRCodeUseCase gerarQRCodeUseCase, IAceitarConexaoUseCase aceitarConexaoUseCase)
 	{
 		_broadcaster = Broadcaster.Instance;
-		_gerarQRCodeUseCase = gerarQRCodeUseCase;
+
+		_recusarConexaoUseCase = recusarConexaoUseCase;
+		_gerarQRCodelido = gerarQRCodelido;
 		_hubContext = hubContext;
+		_gerarQRCodeUseCase = gerarQRCodeUseCase;
+		_aceitarConexaoUseCase = aceitarConexaoUseCase;
 	}
-	
 	public async Task GetQRCode()
-	{
-		var qrCode = await _gerarQRCodeUseCase.Executar();
+	{	
 
-		_broadcaster.InicializarConexao(_hubContext,Context.ConnectionId);
+		try
+		{
+			(var qrCode, var idUsuario) = await _gerarQRCodeUseCase.Executar();
 
-		await Clients.Caller.SendAsync("ResultadoQRCode", qrCode);
+			_broadcaster.InicializarConexao(_hubContext, idUsuario, Context.ConnectionId);
+
+			await Clients.Caller.SendAsync("ResultadoQRCode", qrCode);
+		}
+		catch (LivroReceitasException ex)
+		{
+			await Clients.Caller.SendAsync("Erro", ex.Message);
+		}
+		catch
+		{
+			await Clients.Caller.SendAsync("Erro", ResourceMensagensDeErro.ERRO_DESCONHECIDO);
+		}
 	}
 	
+	public async Task QRCodeLido(string codigoConexao)
+	{
+		try
+		{
+			(var usuarioParaSeConectar, var idUsuarioGerouQRCode) = await _gerarQRCodelido.Executar(codigoConexao);
+
+			var connectionId =  _broadcaster.GetConnectionIdUsuario(idUsuarioGerouQRCode);
+
+			_broadcaster.ResetarTempoExpiracao(connectionId);
+			_broadcaster.SetConnectionIdUsuarioLeitorQRCode(idUsuarioGerouQRCode, Context.ConnectionId);
+
+			await Clients.Client(connectionId).SendAsync("ResultadoQRCodeLido", usuarioParaSeConectar);
+		}
+		catch (LivroReceitasException ex)
+		{
+			await Clients.Caller.SendAsync("Erro", ex.Message);
+		}
+		catch 
+		{
+			await Clients.Caller.SendAsync("Erro", ResourceMensagensDeErro.ERRO_DESCONHECIDO);
+		}	
+	}
+
+	public async Task RecusarConexao()
+	{
+		try
+		{
+			var connectionIdUsuarioQueGerouQRCode = Context.ConnectionId;
+
+			var usuarioId = await _recusarConexaoUseCase.Executar();
+
+			var connectionIdUsuarioQueLeuQRCode = _broadcaster.Remover(connectionIdUsuarioQueGerouQRCode, usuarioId);
+
+			await Clients.Client(connectionIdUsuarioQueLeuQRCode).SendAsync("OnConexaoRecusada");
+		}
+		catch (LivroReceitasException ex)
+		{
+			await Clients.Caller.SendAsync("Erro", ex.Message);
+		}
+		catch
+		{
+			await Clients.Caller.SendAsync("Erro", ResourceMensagensDeErro.ERRO_DESCONHECIDO);
+		}
+	}
+
+	public async Task AceitarConexao(string idUsuarioParaSeConectar)
+	{
+		try
+		{
+			var usuarioId = await _aceitarConexaoUseCase.Executar(idUsuarioParaSeConectar);
+
+			var connectionIdUsuarioQueGerouQRCode = Context.ConnectionId;
+
+			var connectionIdUsuarioQueLeuQRCode = _broadcaster.Remover(connectionIdUsuarioQueGerouQRCode, usuarioId);
+
+			await Clients.Client(connectionIdUsuarioQueLeuQRCode).SendAsync("OnConexaoAceita");
+		}
+		catch (LivroReceitasException ex)
+		{
+			await Clients.Caller.SendAsync("Erro", ex.Message);
+		}
+		catch
+		{
+			await Clients.Caller.SendAsync("Erro", ResourceMensagensDeErro.ERRO_DESCONHECIDO);
+		}
+	}
 }

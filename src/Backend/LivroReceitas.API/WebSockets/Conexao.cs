@@ -11,20 +11,21 @@ public class Conexao
 	private Action<string> _callbackTempoExpirado;
 	private string ConnectionIdUsuarioLeitorQRCode;
 
+	public short tempoRestanteSegundos { get; set; }
+	private System.Timers.Timer _timer { get; set; }
+
 	public Conexao(IHubContext<AdicionarConexao> hubContext, string usuarioQueCriouQRCodeConnectionId)
 	{
 		_hubContext = hubContext;
 		UsuarioQueCriouQRCodeConnectionId = usuarioQueCriouQRCodeConnectionId;
 	}
 
-	private short tempoRestanteSegundos { get; set; }
-	private System.Timers.Timer _timer { get; set; }
-
-	public void IniciarContagemTempo(Action<string> callbackTempoExpirado)
+	public void IniciarContagemTempo(Action<string> callBackTempoExpirado)
 	{
-		_callbackTempoExpirado = callbackTempoExpirado;
-
+		_callbackTempoExpirado = callBackTempoExpirado;
 		StartTimer();
+
+
 	}
 
 	public void ResetarContagemTempo()
@@ -60,15 +61,16 @@ public class Conexao
 		_timer.Elapsed += ElapsedTimer;
 		_timer.Enabled = true;
 	}
-
 	private async void ElapsedTimer(object sender, ElapsedEventArgs e)
 	{
-		if (tempoRestanteSegundos >= 0)
+		if (tempoRestanteSegundos >= 0) 
+		{
 			await _hubContext.Clients.Client(UsuarioQueCriouQRCodeConnectionId).SendAsync("SetTempoRestante", tempoRestanteSegundos--);
+		}			
 		else
 		{
 			StopTimer();
 			_callbackTempoExpirado(UsuarioQueCriouQRCodeConnectionId);
 		}
-	}
+	}		
 }

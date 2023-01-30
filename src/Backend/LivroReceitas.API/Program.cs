@@ -69,7 +69,6 @@ builder.Services.AddAuthorization(option =>
 
 builder.Services.AddScoped<UsuarioAutenticadoAttribute>();
 
-builder.Services.AddHealthChecks();
 
 builder.Services.AddSignalR();
 
@@ -91,6 +90,7 @@ app.MapControllers();
 AtualizarBD();
 
 app.UseMiddleware<CultureMiddleware>();
+
 app.MapHub<AdicionarConexao>("/addConexao");
 
 app.Run();
