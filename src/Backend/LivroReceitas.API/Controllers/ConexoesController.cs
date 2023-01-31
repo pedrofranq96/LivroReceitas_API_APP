@@ -1,5 +1,8 @@
+
+using LivroReceitas.API.Binder;
 using LivroReceitas.API.Filtros.UsuarioLogado;
 using LivroReceitas.Application.UseCases.Conexao.Recuperar;
+using LivroReceitas.Application.UseCases.Conexao.RemoverConexao;
 using LivroReceitas.Comunicacao.Respostas;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,6 +23,21 @@ public class ConexoesController : LivroReceitasController
 		{
 			return Ok(resultado);
 		}
+		return NoContent();
+	}
+
+
+	[HttpDelete]
+	[Route("{id:hashids}")]
+	[ProducesResponseType(StatusCodes.Status204NoContent)]
+	public async Task<IActionResult> RemoverConexao(
+		[FromServices] IRemoverConexaoUseCase useCase,
+		[FromRoute][ModelBinder(typeof(HashidsModelBinder))] long id)
+	{
+
+		 await useCase.Executar(id);
+
+
 		return NoContent();
 	}
 
