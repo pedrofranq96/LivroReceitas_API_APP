@@ -17,6 +17,15 @@ public class ConexaoRepositorio : IConexaoReadOnlyRepositorio, IConexaoWriteOnly
 		return await _context.Conexoes.AnyAsync(c => c.UsuarioId == idUsuarioA && c.ConecatadoComUsuarioId == idUsuarioB);
 	}
 
+	public async Task<IList<Usuario>> RecuperarUsuario(long usuarioId)
+	{
+		return await _context.Conexoes.AsNoTracking()
+			.Include(c => c.ConecatadoComUsuario)
+			.Where(c => c.UsuarioId == usuarioId)
+			.Select(c => c.ConecatadoComUsuario)
+			.ToListAsync();
+	}
+
 	public async Task Registrar(Conexao conexao)
 	{
 		await _context.Conexoes.AddAsync(conexao);
