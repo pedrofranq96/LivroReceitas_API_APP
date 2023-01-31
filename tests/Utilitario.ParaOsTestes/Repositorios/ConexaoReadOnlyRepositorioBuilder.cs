@@ -32,12 +32,12 @@ public class ConexaoReadOnlyRepositorioBuilder
 		return this;
 	}
 
-	//public ConexaoReadOnlyRepositorioBuilder RecuperarDoUsuario(Usuario usuario, IList<Usuario> conexoes)
-	//{
-	//	_repositorio.Setup(x => x.RecuperarDoUsuario (usuario.Id)).ReturnsAsync(conexoes);
+	public ConexaoReadOnlyRepositorioBuilder RecuperarDoUsuario(Usuario usuario, IList<Usuario> conexoes)
+	{
+		_repositorio.Setup(x => x.RecuperarUsuario(usuario.Id)).ReturnsAsync(conexoes);
 
-	//	return this;
-	//}
+		return this;
+	}
 
 	public IConexaoReadOnlyRepositorio Construir()
 	{
