@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using LivroReceitas.Exceptions;
 using Newtonsoft.Json;
+using System.Globalization;
 using System.Net;
 using System.Text;
 using System.Text.Json;
@@ -16,6 +17,7 @@ public class LoginErroDesconhecidoTeste : IClassFixture<LivroReceitasWebApplicat
 	public LoginErroDesconhecidoTeste(LivroReceitasWebApplicationFactorySemIdLogin<Program> factory)
 	{
 		_client = factory.CreateClient();
+		ResourceMensagensDeErro.Culture = CultureInfo.CurrentCulture;
 	}
 
 	[Theory]
@@ -33,17 +35,14 @@ public class LoginErroDesconhecidoTeste : IClassFixture<LivroReceitasWebApplicat
 
 		var responseData = await JsonDocument.ParseAsync(responstaBody);
 
-		var erros = responseData.RootElement.GetProperty("mensagens").EnumerateArray();
+		var erros = responseData.RootElement.GetProperty("mensagens").EnumerateArray();	
 
-		var mensagemEsperada = ResourceMensagensDeErro.ResourceManager.GetString("ERRO_DESCONHECIDO", new System.Globalization.CultureInfo(cultura));
-
-		erros.Should().ContainSingle().And.Contain(x => x.GetString().Equals(mensagemEsperada));
+		erros.Should().ContainSingle().And.Contain(x => x.GetString().Equals(ResourceMensagensDeErro.ERRO_DESCONHECIDO));
 	}
 
 	private async Task<HttpResponseMessage> PostRequest(string metodo, object body, string cultura)
 	{
 		AlterarCulturaRequisicao(cultura);
-
 		var jsonString = JsonConvert.SerializeObject(body);
 
 		return await _client.PostAsync(metodo, new StringContent(jsonString, Encoding.UTF8, "application/json"));

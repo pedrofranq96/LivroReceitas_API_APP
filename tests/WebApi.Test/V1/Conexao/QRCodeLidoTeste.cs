@@ -7,6 +7,7 @@ using WebApi.Test.V1.Conexao.Builder;
 using Xunit;
 using UtilitarioParaOsTestes.Respostas;
 using LivroReceitas.Exceptions;
+using UtilitarioParaOsTestes.Image;
 
 namespace WebApi.Test.V1.Conexao;
 public class QRCodeLidoTeste
@@ -119,9 +120,16 @@ public class QRCodeLidoTeste
 	{
 		var useCaseMock = new Mock<IQRCodeLidoUseCase>();
 
-		useCaseMock.Setup(c => c.Executar(qrcode)).ThrowsAsync(new ArgumentNullException());
+		useCaseMock.Setup(c => c.Executar(qrcode)).ThrowsAsync(new ArgumentNullException(string.Empty));
 
 		return useCaseMock.Object;
+	}
+
+	private static IQRCodeLidoUseCase QRCodeLidoUseCase_ErroUsuarioNaoEncontradoBuilder(RespostaUsuarioConexaoJson respostaJson, string qrCode)
+	{
+		var usecaseMock = new Mock<IQRCodeLidoUseCase>();
+		usecaseMock.Setup(c=> c.Executar(qrCode)).ReturnsAsync((respostaJson, "IdInvalido"));
+		return usecaseMock.Object;
 	}
 
 
@@ -129,7 +137,8 @@ public class QRCodeLidoTeste
 	{
 		var useCaseMock = new Mock<IGerarQRCodeUseCase>();
 
-		useCaseMock.Setup(c => c.Executar()).ReturnsAsync((qrcode, "IdUsuario"));
+		useCaseMock.Setup(c => c.Executar()).ReturnsAsync((ImageBase64Builder.Construir(), "IdUsuario"));
+
 
 		return useCaseMock.Object;
 	}

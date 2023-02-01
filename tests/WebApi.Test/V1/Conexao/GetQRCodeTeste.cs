@@ -3,6 +3,7 @@ using LivroReceitas.Application.UseCases.Conexao.GerarQRCode;
 using LivroReceitas.Exceptions;
 using LivroReceitas.Exceptions.ExceptionsBase;
 using Moq;
+using UtilitarioParaOsTestes.Image;
 using WebApi.Test.V1.Conexao.Builder;
 using Xunit;
 
@@ -94,7 +95,7 @@ public class GetQRCodeTeste
 	{
 		var useCaseMock = new Mock<IGerarQRCodeUseCase>();
 
-		useCaseMock.Setup(c => c.Executar()).ReturnsAsync((qrcode, "IdUsuario"));
+		useCaseMock.Setup(c => c.Executar()).ReturnsAsync((ImageBase64Builder.Construir(), "IdUsuario"));
 
 		return useCaseMock.Object;
 	}

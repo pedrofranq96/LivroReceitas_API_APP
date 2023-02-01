@@ -16,7 +16,7 @@ public class ConexaoAceitaTeste
 
 		(var mockHubContext, var mockClientProxy, var mockClients, var mockHubContextCaller) = MockWebSocketsConnectionClientBuilder.Construir();
 
-		//var useCaseGerarQRCode = GerarQrCodeUseCaseBuilder();
+		
 		var useCaseConexaoAceita = GerarConexaoAceitaUseCaseBuilder(usuarioParaSeConectar.Id);
 
 		var hub = new AdicionarConexao(null,null, mockHubContext.Object, null,useCaseConexaoAceita)
