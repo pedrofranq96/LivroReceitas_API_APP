@@ -41,9 +41,7 @@ public class DeletarReceitaTeste : ControllerBase
 		var responseData = await JsonDocument.ParseAsync(responstaBody);
 
 		var erros = responseData.RootElement.GetProperty("mensagens").EnumerateArray();
-
-		var mensagemEsperada = ResourceMensagensDeErro.ResourceManager.GetString("RECEITA_NAO_ENCONTRADA", new System.Globalization.CultureInfo(cultura));
-		erros.Should().ContainSingle().And.Contain(x => x.GetString().Equals(mensagemEsperada));
+		erros.Should().ContainSingle().And.Contain(x => x.GetString().Equals(ResourceMensagensDeErro.RECEITA_NAO_ENCONTRADA));
 	}
 
 	[Theory]
@@ -64,9 +62,7 @@ public class DeletarReceitaTeste : ControllerBase
 		var responseData = await JsonDocument.ParseAsync(responstaBody);
 
 		var erros = responseData.RootElement.GetProperty("mensagens").EnumerateArray();
-
-		var mensagemEsperada = ResourceMensagensDeErro.ResourceManager.GetString("RECEITA_NAO_ENCONTRADA", new System.Globalization.CultureInfo(cultura));
-		erros.Should().ContainSingle().And.Contain(x => x.GetString().Equals(mensagemEsperada));
+		erros.Should().ContainSingle().And.Contain(x => x.GetString().Equals(ResourceMensagensDeErro.RECEITA_NAO_ENCONTRADA));
 	}
 }
 
