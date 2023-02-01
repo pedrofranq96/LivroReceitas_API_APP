@@ -45,10 +45,10 @@ namespace WebApi.Test.V1.Usuario.Registrar
 
 			var responseData = await JsonDocument.ParseAsync(responstaBody);
 
-			var erros = responseData.RootElement.GetProperty("mensagens").EnumerateArray();
+			var erros = responseData.RootElement.GetProperty("mensagens");
 
 			var mensagemEsperada = ResourceMensagensDeErro.ResourceManager.GetString("NOME_USUARIO_EMBRANCO", new System.Globalization.CultureInfo(cultura));
-			erros.Should().ContainSingle().And.Contain(c => c.GetString().Equals(mensagemEsperada));
+			erros.Equals(mensagemEsperada);
 		}
 	}
 }
