@@ -10,4 +10,5 @@ public class Usuario : EntidadeBase
 	public string Senha { get; set; }
 	public string Telefone { get; set; }
 
+	
 }

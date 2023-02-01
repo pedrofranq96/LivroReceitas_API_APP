@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CATEGORIA_RECEITA_INVALIDA" xml:space="preserve">
+    <value>A categoria é invalida.</value>
+  </data>
+  <data name="CODIGO_NAO_ENCONTRADO" xml:space="preserve">
+    <value>QRCode não encontrado.</value>
+  </data>
   <data name="EMAIL_JA_REGISTRADO" xml:space="preserve">
     <value>O email informado já está registrado na base de dados.</value>
   </data>
@@ -129,11 +135,32 @@
   <data name="ERRO_DESCONHECIDO" xml:space="preserve">
     <value>Erro desconhecido.</value>
   </data>
+  <data name="ESTA_CONEXAO_JA_EXISTE" xml:space="preserve">
+    <value>A conexao executada já existe.</value>
+  </data>
   <data name="LOGIN_INVALIDO" xml:space="preserve">
     <value>O email e/ou senha estão incorretos.</value>
   </data>
+  <data name="MODOPREPARO_RECEITA_EMBRANCO" xml:space="preserve">
+    <value>O modo preparo está vazio.</value>
+  </data>
   <data name="NOME_USUARIO_EMBRANCO" xml:space="preserve">
     <value>O nome do usuário deve ser informado.</value>
+  </data>
+  <data name="RECEITA_INGREDIENTE_PRODUTO_EMBRANCO" xml:space="preserve">
+    <value>O produto está vazio</value>
+  </data>
+  <data name="RECEITA_INGREDIENTE_QUANTIDADE_EMBRANCO" xml:space="preserve">
+    <value>A quantidade do produto está vazio.</value>
+  </data>
+  <data name="RECEITA_INGREDIENTE_REPETIDO" xml:space="preserve">
+    <value>Ingrediente já existe na base de dados.</value>
+  </data>
+  <data name="RECEITA_MINIMO_UM_INGREDIENTE" xml:space="preserve">
+    <value>Receita deve conter no mínimo 1 ingrediente.</value>
+  </data>
+  <data name="RECEITA_NAO_ENCONTRADA" xml:space="preserve">
+    <value>Receita não encontrada.</value>
   </data>
   <data name="SENHA_ATUAL_INVALIDA" xml:space="preserve">
     <value>A senha atual é inválida.</value>
@@ -150,10 +177,25 @@
   <data name="TELEFONE_USUARIO_INVALIDO" xml:space="preserve">
     <value>O telefone do usuário deve estar no formato XX X XXXX-XXXX</value>
   </data>
+  <data name="TEMPO_PREPARO_INVALIDO" xml:space="preserve">
+    <value>Tempo de preparo precisa ser valido.</value>
+  </data>
+  <data name="TITULO_RECEITA_EMBRANCO" xml:space="preserve">
+    <value>O titulo da receita está em vazio.</value>
+  </data>
   <data name="TOKEN_EXPIRADO" xml:space="preserve">
     <value>Faça login novamente no App.</value>
   </data>
+  <data name="USUARIO_NAO_CONECTADO" xml:space="preserve">
+    <value>Usuário não está conectado.</value>
+  </data>
+  <data name="USUARIO_NAO_ENCONTRADO" xml:space="preserve">
+    <value>Usuario não encontrado</value>
+  </data>
   <data name="USUARIO_SEM_PERMISSAO" xml:space="preserve">
     <value>Você não tem permissão para acessar este recurso.</value>
+  </data>
+  <data name="VOCE_NAO_PODE_EXECUTAR_ESTA_OPERACAO" xml:space="preserve">
+    <value>Você não tem autorização para executar esta operacao.</value>
   </data>
 </root>
