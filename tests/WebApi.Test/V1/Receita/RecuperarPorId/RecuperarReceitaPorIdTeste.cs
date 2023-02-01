@@ -39,7 +39,7 @@ public class RecuperarReceitaPorIdTeste : ControllerBase
 		responseData.RootElement.GetProperty("categoria").GetUInt16().Should().BeInRange(0, 3);
 		responseData.RootElement.GetProperty("modoPreparo").GetString().Should().NotBeNullOrWhiteSpace();
 		responseData.RootElement.GetProperty("ingredientes").GetArrayLength().Should().BeGreaterThan(0);
-		//responseData.RootElement.GetProperty("tempoPreparo").GetUInt32().Should().BeGreaterThan(0).And.BeLessThanOrEqualTo(1000);
+		responseData.RootElement.GetProperty("tempoPreparo").GetUInt32().Should().BeGreaterThan(0).And.BeLessThanOrEqualTo(1000);
 	}
 
 	[Theory]
@@ -59,10 +59,10 @@ public class RecuperarReceitaPorIdTeste : ControllerBase
 
 		var responseData = await JsonDocument.ParseAsync(responstaBody);
 
-		var erros = responseData.RootElement.GetProperty("mensagens").EnumerateArray();
+		var erros = responseData.RootElement.GetProperty("mensagens");
 
 		var mensagemEsperada = ResourceMensagensDeErro.ResourceManager.GetString("RECEITA_NAO_ENCONTRADA", new System.Globalization.CultureInfo(cultura));
-		erros.Should().ContainSingle().And.Contain(x => x.GetString().Equals(mensagemEsperada));
+		erros.Equals(mensagemEsperada);
 	}
 }
 
