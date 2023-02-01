@@ -29,7 +29,7 @@ public class ReceitaAtualizarUseCase : IReceitaAtualizarUseCase
 		var usuarioLogado = await _usuarioLogado.RecuperarUsuario();
 
 		var receita = await _repositorio.RecuperarPorId(id);
-		
+
 		Validar(usuarioLogado,receita, requisicao);
 		
 		_mapper.Map(requisicao, receita);
@@ -39,7 +39,7 @@ public class ReceitaAtualizarUseCase : IReceitaAtualizarUseCase
 		await _unidadeDeTrabalho.Commit();
 	}
 
-	public void Validar(Domain.Entidades.Usuario usuarioLogado, Domain.Entidades.Receita receita, RequisicaoReceitaJson requisicao)
+	public static void Validar(Domain.Entidades.Usuario usuarioLogado, Domain.Entidades.Receita receita, RequisicaoReceitaJson requisicao)
 	{
 		if (receita is null || receita.UsuarioId != usuarioLogado.Id)
 		{

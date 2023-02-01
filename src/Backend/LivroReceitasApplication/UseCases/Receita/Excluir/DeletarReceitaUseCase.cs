@@ -33,7 +33,7 @@ public class DeletarReceitaUseCase : IDeletarReceitaUseCase
 
 		await _unidadeDeTrabalho.Commit();
 	}
-	public void Validar(Domain.Entidades.Usuario usuarioLogado, Domain.Entidades.Receita receita)
+	public static void Validar(Domain.Entidades.Usuario usuarioLogado, Domain.Entidades.Receita receita)
 	{
 		if (receita is null || receita.UsuarioId != usuarioLogado.Id)
 		{
