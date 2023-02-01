@@ -1,9 +1,11 @@
 ﻿using LivroReceitas.API.WebSockets;
+using LivroReceitas.Application.UseCases.Conexao.AceitarConexao;
 using LivroReceitas.Application.UseCases.Conexao.GerarQRCode;
 using LivroReceitas.Exceptions;
 using LivroReceitas.Exceptions.ExceptionsBase;
 using Moq;
 using UtilitarioParaOsTestes.Image;
+using UtilitarioParaOsTestes.Respostas;
 using WebApi.Test.V1.Conexao.Builder;
 using Xunit;
 
@@ -13,26 +15,25 @@ public class GetQRCodeTeste
 	[Fact]
 	public async Task Validar_Sucesso()
 	{
-		var codigoGeradoParaConexao = Guid.NewGuid().ToString();
+		var usuarioParaSeConectar = RespostaUsuarioConexaoBuilder.Construir();
 
 		(var mockHubContext, var mockClienteProxy, var mockClients, var mockHubContextCaller) = MockWebSocketsConnectionClientBuilder.Construir();
 
-		var useCaseGerarQRCode = GerarQrCodeUseCaseBuilder(codigoGeradoParaConexao);
+		var useCaseGerarQRCode = GerarQRCodeUseCaseBuilder();
+		var useCaseConexaoAceita = GerarConexaoAceitaUseCaseBuilder(usuarioParaSeConectar.Id);
 
-
-		var hub = new AdicionarConexao(null, null, mockHubContext.Object, useCaseGerarQRCode, null)
+		var hub = new AdicionarConexao(null, null, mockHubContext.Object, useCaseGerarQRCode, useCaseConexaoAceita)
 		{
 			Context = mockHubContextCaller.Object,
 			Clients = mockClients.Object,
 		};
 
 		await hub.GetQRCode();
-
+		await hub.AceitarConexao(usuarioParaSeConectar.Id);
 
 		mockClienteProxy.Verify(
-			clientProxy => clientProxy.SendCoreAsync("ResultadoQRCode", It.Is<object[]>(
-				resposta=> resposta != null
-				&& resposta.Length == 1 && resposta.First().Equals(codigoGeradoParaConexao)), default),	Times.Once);
+			clientProxy => clientProxy.SendCoreAsync("OnConexaoAceita",
+			It.Is<object[]>(resposta => resposta != null && resposta.Length == 0), default), Times.Once);
 
 	}
 
@@ -91,14 +92,7 @@ public class GetQRCodeTeste
 
 	}
 
-	private static IGerarQRCodeUseCase GerarQrCodeUseCaseBuilder(string qrcode)
-	{
-		var useCaseMock = new Mock<IGerarQRCodeUseCase>();
-
-		useCaseMock.Setup(c => c.Executar()).ReturnsAsync((ImageBase64Builder.Construir(), "IdUsuario"));
-
-		return useCaseMock.Object;
-	}
+	
 
 
 	private static IGerarQRCodeUseCase GerarQrCodeUseCaseErro_DesconhecidoBuilder()
@@ -115,6 +109,24 @@ public class GetQRCodeTeste
 		var useCaseMock = new Mock<IGerarQRCodeUseCase>();
 
 		useCaseMock.Setup(c => c.Executar()).ThrowsAsync(new LivroReceitasException(mensagemErro));
+
+		return useCaseMock.Object;
+	}
+
+	private static IAceitarConexaoUseCase GerarConexaoAceitaUseCaseBuilder(string idUsuarioParaSeConectar)
+	{
+		var useCaseMock = new Mock<IAceitarConexaoUseCase>();
+
+		useCaseMock.Setup(c => c.Executar(idUsuarioParaSeConectar)).ReturnsAsync("IdUsuario");
+
+		return useCaseMock.Object;
+	}
+
+	private static IGerarQRCodeUseCase GerarQRCodeUseCaseBuilder()
+	{
+		var useCaseMock = new Mock<IGerarQRCodeUseCase>();
+
+		useCaseMock.Setup(c => c.Executar()).ReturnsAsync((ImageBase64Builder.Construir(), "IdUsuario"));
 
 		return useCaseMock.Object;
 	}

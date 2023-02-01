@@ -1,7 +1,9 @@
 ﻿using LivroReceitas.API.WebSockets;
 using LivroReceitas.Application.UseCases.Conexao.AceitarConexao;
+using LivroReceitas.Application.UseCases.Conexao.GerarQRCode;
 using LivroReceitas.Exceptions;
 using Moq;
+using UtilitarioParaOsTestes.Image;
 using UtilitarioParaOsTestes.Respostas;
 using WebApi.Test.V1.Conexao.Builder;
 using Xunit;
@@ -16,10 +18,10 @@ public class ConexaoAceitaTeste
 
 		(var mockHubContext, var mockClientProxy, var mockClients, var mockHubContextCaller) = MockWebSocketsConnectionClientBuilder.Construir();
 
-		
+		var useCaseGerarQRCode = GerarQRCodeUseCaseBuilder();
 		var useCaseConexaoAceita = GerarConexaoAceitaUseCaseBuilder(usuarioParaSeConectar.Id);
 
-		var hub = new AdicionarConexao(null,null, mockHubContext.Object, null,useCaseConexaoAceita)
+		var hub = new AdicionarConexao(null,null, mockHubContext.Object, useCaseGerarQRCode, useCaseConexaoAceita)
 		{
 			Context = mockHubContextCaller.Object,
 			Clients = mockClients.Object
@@ -75,13 +77,13 @@ public class ConexaoAceitaTeste
 		return useCaseMock.Object;
 	}
 
-	//private static IGerarQRCodeUseCase GerarQRCodeUseCaseBuilder()
-	//{
-	//	var useCaseMock = new Mock<IGerarQRCodeUseCase>();
+	private static IGerarQRCodeUseCase GerarQRCodeUseCaseBuilder()
+	{
+		var useCaseMock = new Mock<IGerarQRCodeUseCase>();
 
-	//	useCaseMock.Setup(c => c.Executar()).ReturnsAsync((ImageBase64Builder.Construir(), "IdUsuario"));
+		useCaseMock.Setup(c => c.Executar()).ReturnsAsync((ImageBase64Builder.Construir(), "IdUsuario"));
 
-	//	return useCaseMock.Object;
-	//}
+		return useCaseMock.Object;
+	}
 }
 

@@ -15,7 +15,7 @@ public class ControllerBase : IClassFixture<LivroReceitasWebApplicationFactory<P
 	public ControllerBase(LivroReceitasWebApplicationFactory<Program> factory)
 	{
 		_client = factory.CreateClient();
-		ResourceMensagensDeErro.Culture = CultureInfo.CurrentCulture;
+	
 	}
 
 

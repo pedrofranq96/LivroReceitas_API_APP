@@ -5,7 +5,9 @@ using Moq;
 namespace WebApi.Test.V1.Conexao.Builder;
 public class MockWebSocketsConnectionClientBuilder
 {
-	public static (Mock<IHubContext<AdicionarConexao>> mockHubContext, Mock<IClientProxy> mockClientProxy, Mock<IHubCallerClients> mockClients, Mock<HubCallerContext> mockHubContextCaller) Construir()
+	public static (Mock<IHubContext<AdicionarConexao>> mockHubContext,
+		Mock<IClientProxy> mockClientProxy, Mock<IHubCallerClients> mockClients, 
+		Mock<HubCallerContext> mockHubContextCaller) Construir()
 	{
 		var mockClientProxy = new Mock<IClientProxy>();
 

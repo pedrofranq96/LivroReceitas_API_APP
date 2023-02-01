@@ -1,7 +1,6 @@
 ﻿using FluentAssertions;
 using LivroReceitas.Exceptions;
 using System.Net;
-using System.Text;
 using System.Text.Json;
 using UtilitarioParaOsTestes.HashIds;
 using UtilitarioParaOsTestes.Requisicoes;
@@ -39,7 +38,7 @@ public class AtualizarReceitaTeste : ControllerBase
 		responseData.RootElement.GetProperty("titulo").GetString().Should().Be(requisicao.Titulo);
 		responseData.RootElement.GetProperty("categoria").GetUInt16().Should().Be((ushort)requisicao.Categoria);
 		responseData.RootElement.GetProperty("modoPreparo").GetString().Should().Be(requisicao.ModoPreparo);
-		//responseData.RootElement.GetProperty("tempoPreparo").GetInt32().Should().Be(requisicao.TempoPreparo);
+		responseData.RootElement.GetProperty("tempoPreparo").GetInt32().Should().Be(requisicao.TempoPreparo);
 	}
 
 	[Theory]

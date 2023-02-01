@@ -51,8 +51,8 @@ public class AlterarSenhaTeste : ControllerBase
 
 		var erros = responseData.RootElement.GetProperty("mensagens").EnumerateArray();
 
-		var mensagemEsperada = ResourceMensagensDeErro.ResourceManager.GetString("SENHA_USUARIO_EMBRANCO", new System.Globalization.CultureInfo(cultura));
+		
 
-		erros.Should().ContainSingle().And.Contain(x => x.GetString().Equals(mensagemEsperada));
+		erros.Should().ContainSingle().And.Contain(x => x.GetString().Equals(ResourceMensagensDeErro.SENHA_USUARIO_EMBRANCO));
 	}
 }
