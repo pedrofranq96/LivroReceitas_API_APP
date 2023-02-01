@@ -2,6 +2,8 @@
 using LivroReceitas.Application.Servicos.UsuarioLogado;
 using LivroReceitas.Domain.Repositorio;
 using LivroReceitas.Domain.Repositorio.Codigos;
+using QRCoder;
+using System.Drawing;
 
 namespace LivroReceitas.Application.UseCases.Conexao.GerarQRCode;
 public class GerarQRCodeUseCase : IGerarQRCodeUseCase
@@ -20,7 +22,7 @@ public class GerarQRCodeUseCase : IGerarQRCodeUseCase
 		_unidadeTrabalho = unidadeTrabalho;
 		_hashids = hashids;
 	}
-	public async Task<(string qrCode, string idUsuario)> Executar()
+	public async Task<(byte[] qrCode, string idUsuario)> Executar()
 	{
 		var usuarioLogado = await _usuarioLogado.RecuperarUsuario();
 
@@ -34,6 +36,19 @@ public class GerarQRCodeUseCase : IGerarQRCodeUseCase
 
 		await _unidadeTrabalho.Commit();
 
-		return (codigo.Codigo, _hashids.EncodeLong(usuarioLogado.Id));
+		return (GerarImagemQRCode(codigo.Codigo), _hashids.EncodeLong(usuarioLogado.Id));
+	}
+
+	private static byte[] GerarImagemQRCode(string codigo)
+	{
+		var qrCodeGenerator = new QRCodeGenerator();
+		var qrCodeData = qrCodeGenerator.CreateQrCode(codigo, QRCodeGenerator.ECCLevel.Q);
+
+		var qrcode = new QRCode(qrCodeData);
+
+		var bitmap = qrcode.GetGraphic(5, Color.Black, Color.Transparent, null, 15);
+		using var stream = new MemoryStream();
+		bitmap.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+		return stream.ToArray();
 	}
 }
