@@ -38,7 +38,7 @@ public class RegistrarReceitaUseCase : IRegistrarReceitaUseCase
 		return _mapper.Map<RespostaReceitaJson>(receita);
 	}
 
-	private void Validar(RequisicaoReceitaJson requisicao)
+	private static void Validar(RequisicaoReceitaJson requisicao)
 	{
 		var validator = new RegistrarReceitaValidator();
 		var resultado = validator.Validate(requisicao);

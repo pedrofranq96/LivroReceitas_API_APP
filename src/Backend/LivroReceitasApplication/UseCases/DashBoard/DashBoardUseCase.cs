@@ -48,7 +48,7 @@ public class DashBoardUseCase : IDashBoardUseCase
 		var usuariosConectados = conexoes.Select(c => c.Id).ToList();
 		var receitasUsuarioConectados = await _repositorio.RecuperarTodasDosUsuarios(usuariosConectados);
 
-		return receitasUsuarioConectados = Filtrar(requisicao, receitasUsuarioConectados);
+		return Filtrar(requisicao, receitasUsuarioConectados);
 	}
 
 	private static IList<Domain.Entidades.Receita> Filtrar(RequisicaoDashBoardJson requisicao, IList<Domain.Entidades.Receita> receitas)
