@@ -3,6 +3,7 @@ using LivroReceitas.Application.Servicos.UsuarioLogado;
 using LivroReceitas.Comunicacao.Respostas;
 using LivroReceitas.Domain.Repositorio.Codigos;
 using LivroReceitas.Domain.Repositorio.Conexao;
+using LivroReceitas.Exceptions;
 using LivroReceitas.Exceptions.ExceptionsBase;
 
 namespace LivroReceitas.Application.UseCases.Conexao.QRCodeLido;
@@ -42,19 +43,19 @@ public class QRCodeLidoUseCase : IQRCodeLidoUseCase
 	{
 		if (codigo is null)
 		{
-			throw new LivroReceitasException("");
+			throw new LivroReceitasException(ResourceMensagensDeErro.CODIGO_NAO_ENCONTRADO);
 		}
 
 		if (codigo.UsuarioId == usuarioLogado.Id)
 		{
-			throw new LivroReceitasException("");
+			throw new LivroReceitasException(ResourceMensagensDeErro.VOCE_NAO_PODE_EXECUTAR_ESTA_OPERACAO);
 		}
 
 		var existeConexao = await _repositorioConexao.ExisteConexao(codigo.UsuarioId, usuarioLogado.Id);
 
 		if (existeConexao)
 		{
-			throw new LivroReceitasException("");
+			throw new LivroReceitasException(ResourceMensagensDeErro.ESTA_CONEXAO_JA_EXISTE);
 		}
 	}	
 }

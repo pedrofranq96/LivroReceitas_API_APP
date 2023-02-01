@@ -3,6 +3,7 @@ using LivroReceitas.Application.UseCases.Conexao.GerarQRCode;
 using LivroReceitas.Application.UseCases.Conexao.RecusarConexao;
 using LivroReceitas.Exceptions;
 using Moq;
+using UtilitarioParaOsTestes.Image;
 using UtilitarioParaOsTestes.Respostas;
 using WebApi.Test.V1.Conexao.Builder;
 using Xunit;
@@ -108,7 +109,7 @@ public class ConexaoRecusadaTeste
 	{
 		var useCaseMock = new Mock<IGerarQRCodeUseCase>();
 
-		useCaseMock.Setup(c => c.Executar()).ReturnsAsync((qrcode, "IdUsuario"));
+		useCaseMock.Setup(c => c.Executar()).ReturnsAsync((ImageBase64Builder.Construir(), "IdUsuario"));
 
 		return useCaseMock.Object;
 	}

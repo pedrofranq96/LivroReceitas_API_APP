@@ -9,10 +9,10 @@ using LivroReceitas.Exceptions.ExceptionsBase;
 namespace LivroReceitas.Application.UseCases.Receita.Registrar;
 public class RegistrarReceitaUseCase : IRegistrarReceitaUseCase
 {
-	private IMapper _mapper;
-	private IUnidadeDeTrabalho _unidadeDeTrabalho;
-	private IUsuarioLogado _usuarioLogado;
-	private IReceitaWriteOnlyRepositorio _receitaWriteOnlyRepositorio;
+	private readonly IMapper _mapper;
+	private readonly IUnidadeDeTrabalho _unidadeDeTrabalho;
+	private readonly IUsuarioLogado _usuarioLogado;
+	private readonly IReceitaWriteOnlyRepositorio _receitaWriteOnlyRepositorio;
 
 	public RegistrarReceitaUseCase(IMapper mapper, IUnidadeDeTrabalho unidadeDeTrabalho,
 		IUsuarioLogado usuarioLogado, IReceitaWriteOnlyRepositorio receitaWriteOnlyRepositorio)
