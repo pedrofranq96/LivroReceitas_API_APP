@@ -2,6 +2,7 @@
 using LivroReceitas.Domain.Repositorio.Conexao;
 using LivroReceitas.Exceptions.ExceptionsBase;
 using LivroReceitas.Domain.Repositorio;
+using LivroReceitas.Exceptions;
 
 namespace LivroReceitas.Application.UseCases.Conexao.RemoverConexao;
 public class RemoverConexaoUseCase : IRemoverConexaoUseCase
@@ -40,7 +41,7 @@ public class RemoverConexaoUseCase : IRemoverConexaoUseCase
 		
 		if (!usuariosConectados.Any(c => c.Id == idUsuarioConectadoParaRemover))
 		{
-			throw new ErrosDeValidacaoException(new List<string> { "" });
+			throw new ErrosDeValidacaoException(new List<string> { ResourceMensagensDeErro.USUARIO_NAO_ENCONTRADO });
 		}
 	}
 }
